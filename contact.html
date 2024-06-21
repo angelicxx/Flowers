@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Промо Цветов - Контакты</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <!-- Подключение стилей Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+        .message {
+            display: none;
+            color: green;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .star {
+            position: absolute;
+            font-size: 24px;
+            color: gold;
+            cursor: pointer;
+            animation: spin 5s linear infinite;
+        }
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="flowers.html">Цветы</a></li>
+                <li><a href="contact.html">Контакты</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Свяжитесь с нами</h1>
+        <form id="contactForm">
+            <label for="name">Имя:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="message">Сообщение:</label>
+            <textarea id="message" name="message" required></textarea>
+            <button type="submit">Отправить</button>
+        </form>
+        <div class="message" id="confirmationMessage">Ваше сообщение отправлено, с вами свяжутся в течение ближайших 4 часов</div>
+        <div class="contact-info">
+            <h2>Наши адреса</h2>
+            <div class="location">
+                <h3>Местоположение 1</h3>
+                <p>123 Цветочная улица, Париж, Франция</p>
+            </div>
+            <div class="location">
+                <h3>Местоположение 2</h3>
+                <p>456 Улица Цветения, Лондон, Великобритания</p>
+            </div>
+        </div>
+        <div id="map"></div>
+    </main>
+
+    <footer>
+        <p>© 2024 Flower Promo | Designed by Nikol</p>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+    </footer>
+
+    <!-- Подключение Leaflet.js -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // Инициализация карты
+        var map = L.map('map').setView([51.505, -0.09], 2);
+
+        // Добавление слоя карты OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Добавление маркера для каждого местоположения
+        var marker1 = L.marker([51.505, -0.09]).addTo(map)
+            .bindPopup('Местоположение 1: 123 Цветочная улица, Город, Страна')
+            .openPopup();
+
+        var marker2 = L.marker([48.8566, 2.3522]).addTo(map)
+            .bindPopup('Местоположение 2: 456 Улица Цветения, Город, Страна')
+            .openPopup();
+
+        // Обработчик отправки формы
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Предотвращаем отправку формы
+            document.getElementById('confirmationMessage').style.display = 'block'; // Показываем сообщение
+            document.getElementById('contactForm').reset(); // Сбрасываем форму
+        });
+
+        // Создаем звездочки
+        function createStars() {
+            for (let i = 0; i < 10; i++) {
+                let star = document.createElement('div');
+                star.innerHTML = '★';
+                star.classList.add('star');
+                star.style.top = Math.random() * 100 + 'vh';
+                star.style.left = Math.random() * 100 + 'vw';
+                star.addEventListener('click', moveStar);
+                document.body.appendChild(star);
+            }
+        }
+
+        function moveStar(event) {
+            let star = event.target;
+            star.style.top = Math.random() * 100 + 'vh';
+            star.style.left = Math.random() * 100 + 'vw';
+        }
+
+        createStars();
+    </script>
+</body>
+</html>
+
+

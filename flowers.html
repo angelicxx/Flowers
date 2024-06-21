@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Промо Цветов - Цветы</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <style>
+        /* Добавляем стили для секции "Наши работники" */
+        .employees-section {
+            margin-top: 50px;
+        }
+
+        .employees-title {
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .employee-slider {
+            position: relative;
+            width: 80%;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .employee-slide {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .employee-slide.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .employee-info {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        .slider-controls {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .slider-controls button {
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .employee-photo {
+            max-width: 400px; /* Увеличиваем размер фотографии */
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="flowers.html">Цветы</a></li>
+                <li><a href="contact.html">Контакты</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Наши Цветы</h1>
+        <div class="flower-gallery">
+            <div class="flower-item">
+                <img src="images/flower1.jpg" alt="Цветок 1">
+                <p>Роза</p>
+            </div>
+            <div class="flower-item">
+                <img src="images/flower2.jpg" alt="Цветок 2">
+                <p>Лилия</p>
+            </div>
+            <div class="flower-item">
+                <img src="images/flower3.jpg" alt="Цветок 3">
+                <p>Тюльпан</p>
+            </div>
+            <div class="flower-item">
+                <img src="images/flower4.jpg" alt="Цветок 4">
+                <p>Подсолнух</p>
+            </div>
+            <div class="flower-item">
+                <img src="images/flower5.jpg" alt="Цветок 5">
+                <p>Маргаритка</p>
+            </div>
+            <div class="flower-item">
+                <img src="images/flower6.jpg" alt="Цветок 6">
+                <p>Орхидея</p>
+            </div>
+        </div>
+
+        <div class="employees-section">
+            <h2 class="employees-title">Наши работники</h2>
+            <div class="employee-slider">
+                <div class="employee-slide active">
+                    <img src="images/gregor_lersch.jpg" alt="Грегор Лерш" class="employee-photo">
+                    <h3>Грегор Лерш</h3>
+                    <p class="employee-info">Грегор Лерш - известный немецкий флорист, известный своим инновационным и художественным подходом к флористике.</p>
+                </div>
+                <div class="employee-slide">
+                    <img src="images/daniel_ost.jpg" alt="Даниэль Ост" class="employee-photo">
+                    <h3>Даниэль Ост</h3>
+                    <p class="employee-info">Даниэль Ост - бельгийский флорист, прославившийся своими крупномасштабными цветочными инсталляциями и креативными дизайнами.</p>
+                </div>
+                <div class="employee-slide">
+                    <img src="images/paula_pryke.jpg" alt="Паула Прайк" class="employee-photo">
+                    <h3>Паула Прайк</h3>
+                    <p class="employee-info">Паула Прайк - известная британская флористка и автор, известная своими яркими и современными цветочными композициями.</p>
+                </div>
+                <div class="employee-slide">
+                    <img src="images/putnam_putnam.jpg" alt="Патнэм и Патнэм" class="employee-photo">
+                    <h3>Патнэм и Патнэм</h3>
+                    <p class="employee-info">Майкл и Даррох Патнэм - американский дуэт флористов, известный своими пышными и романтичными цветочными композициями.</p>
+                </div>
+                <div class="employee-slide">
+                    <img src="images/jane_packer.jpg" alt="Джейн Пакер" class="employee-photo">
+                    <h3>Джейн Пакер</h3>
+                    <p class="employee-info">Джейн Пакер - известная британская флористка, известная своим современным и стильным подходом к флористике.</p>
+                </div>
+            </div>
+            <div class="slider-controls">
+                <button onclick="prevSlide()">Назад</button>
+                <button onclick="nextSlide()">Вперед</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2024 Flower Promo | Designed by Nikol</p>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.employee-slide');
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === index) {
+                    slide.classList.add('active');
+                }
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setInterval(nextSlide, 5000); // Автоматическое переключение слайдов каждые 5 секунд
+        });
+    </script>
+    <script src="js/script.js"></script>
+</body>
+</html>
